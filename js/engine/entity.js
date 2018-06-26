@@ -74,10 +74,15 @@ const Entity = {
         }
 
         if (DEBUG) {
-            if( this.tileset === null ) {
-                context.fillStyle = '#f00';
-                context.fillRect(this.posX, this.posY, this.width, 2);
-            }
+            // if( this.tileset === null ) {
+                let rect = this.getCollisionRect();
+
+                context.fillStyle   = 'rgba(255,0,0,0.5)';
+                context.strokeStyle = 'rgba(255,0,0,0.9)';
+
+                context.fillRect( rect.x1, rect.y1, rect.x2 - rect.x1, rect.y2 - rect.y1 );
+                context.strokeRect( rect.x1 + 0.5 , rect.y1 + 0.5, rect.x2 - rect.x1 - 1, rect.y2 - rect.y1 - 1 );
+            // }
         }
     }
 

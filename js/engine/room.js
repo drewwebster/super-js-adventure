@@ -88,7 +88,7 @@ const Room = {
                 entitiesLayer.data[i].y < (roomY + ROOM_HEIGHT)
             ) {
                 this.entities.push( Object.create(Entity).init(
-                        entitiesLayer.data[i].id,
+                        entitiesLayer.data[i].id.toLowerCase(),
                         entitiesLayer.data[i].x - roomX,
                         entitiesLayer.data[i].y - roomY
                     )
@@ -172,14 +172,14 @@ const Room = {
                     tilesetCoords = Map.cellToPx.call(tileset, (tile - tileset.gid));
 
                     // draw to layer's canvas.
-                    layerObj.context.drawImage(tileset.img, tilesetCoords.x, tilesetCoords.y, TILE_SIZE, TILE_SIZE, (col * 8), (row * 8), TILE_SIZE, TILE_SIZE);
+                    layerObj.context.drawImage(tileset.bitmap, tilesetCoords.x, tilesetCoords.y, TILE_SIZE, TILE_SIZE, (col * 8), (row * 8), TILE_SIZE, TILE_SIZE);
 
                     // now check if that tile was an animated tile.
                     // if so, loop through the tilesequence and add each frame to the consecutive animLayers.
                     if( Game.animationTiles.indexOf(tile) != -1 ) {
                         for (var i = 0; i < 3; i++) { // there are always always 3.
                             tilesetCoords = Map.cellToPx.call(tileset, (Game.tileSequences[tile][i] - tileset.gid));
-                            this.animLayers[i].context.drawImage(tileset.img, tilesetCoords.x, tilesetCoords.y, TILE_SIZE, TILE_SIZE, (col * 8), (row * 8), TILE_SIZE, TILE_SIZE);
+                            this.animLayers[i].context.drawImage(tileset.bitmap, tilesetCoords.x, tilesetCoords.y, TILE_SIZE, TILE_SIZE, (col * 8), (row * 8), TILE_SIZE, TILE_SIZE);
                         }
                     }
 
